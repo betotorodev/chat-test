@@ -41,8 +41,8 @@ export const UserModal = (): JSX.Element => {
           <DialogDescription className='mb-6'>
             ⚽️ Please provide a user name and star talking with jarvis
           </DialogDescription>
-          <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-            <Input type='text' name='user_name' className='bg-[#1a1a1a]' />
+          <form className='flex flex-col gap-4' onSubmit={handleSubmit} data-testid='user-form'>
+            <Input type='text' name='user_name' className='bg-[#1a1a1a]' aria-label='user_name' placeholder='Say something...' />
             <Button isLoading={loading} type='submit' className='w-full ring-0 outline-none mt-2' variant='primary'>Ok, got it!</Button>
           </form>
         </DialogContent>
