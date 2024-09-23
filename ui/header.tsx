@@ -41,24 +41,26 @@ export function Header (): JSX.Element {
         <div className='w-12 h-12 mr-3 rounded-full bg-[#f0f0f0] text-2xl flex items-center justify-center'>
           😎
         </div>
-        <div className='flex flex-col gap-1'>
-          <h1 className='leading-none'>{user?.user_name ?? 'beto'}</h1>
+        <div className='flex flex-col gap-1 flex-1 overflow-hidden'>
+          <h1 className='leading-none truncate'>{user?.user_name ?? 'beto'}</h1>
           <small className='leading-none text-[#959595]'>Súper user</small>
         </div>
       </nav>
-      <section className='flex-1 border-[#282828] rounded-2xl border p-4'>
-        <form action={handleAction} className='flex justify-between items-center mb-4'>
-          <h2 className='text-base'>Chats</h2>
-          <button type='submit'>
-            <AddIcon />
-          </button>
+      <section className='relative flex-1 border-[#282828] rounded-2xl border overflow-y-scroll'>
+        <form action={handleAction} className='sticky top-0 bg-[#141414]/30 backdrop-blur-sm'>
+          <div className='flex p-4  justify-between items-center'>
+            <h2 className='text-base'>Chats</h2>
+            <button type='submit'>
+              <AddIcon />
+            </button>
+          </div>
         </form>
-        <ul className='flex flex-col gap-2'>
+        <ul className='flex flex-col gap-2 px-4'>
           {
             chats.map((chat, index) => (
               <li onClick={() => setCurrentChat(chat)} key={`chat-${index}`} className='flex flex-col items-center gap-2 p-2 border border-[#282828] rounded-2xl shadow-sm cursor-pointer'>
-                <div className='flex justify-between items-center w-full self-start text-sm h-6'>
-                  <span>{chat?.list_of_messages[0]?.content ?? 'New chat'}</span>
+                <div className='flex justify-between items-center gap-1 w-full self-start text-sm h-6'>
+                  <span className='truncate'>{chat?.list_of_messages[0]?.content ?? 'New chat'}</span>
                   {currentChat.id === chat.id && <Badge variant='success'>current</Badge>}
                 </div>
                 <small className='self-end text-xs text-[#959595]'>{formatTime(chat.created_at)}</small>
