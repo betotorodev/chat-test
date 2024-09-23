@@ -7,24 +7,31 @@ import { getChats } from '@/lib/db/queries'
 import { formatTime } from '@/lib/utils'
 import { addChat, editChat } from '@/app/actions'
 import { Badge } from '@/components/badge'
+import { Chat } from '@/lib/types'
 
 export function Header (): JSX.Element {
   const user = useUserStore((state) => state.user)
   const currentChat = useCurrentChatStore((state) => state.currentChat)
   const setCurrentChat = useCurrentChatStore((state) => state.setCurrentChat)
-  const [chats, setChats] = useState([])
+  const [chats, setChats] = useState<Chat[]>([])
 
-  const handleAction = async () => {
+  const handleAction = async (): Promise<void> => {
     if (user === null) {
       return
     }
     const { chat } = await addChat(user.id)
-    await editChat(currentChat)
-    setCurrentChat(chat)
+    if (currentChat !== null) {
+      await editChat(currentChat)
+    }
+    if (chat !== undefined) {
+      setCurrentChat(chat)
+    }
   }
 
-  const handleChats = async (chat): Promise<void> => {
-    await editChat(currentChat)
+  const handleChats = async (chat: Chat): Promise<void> => {
+    if (currentChat !== null) {
+      await editChat(currentChat)
+    }
     setCurrentChat(chat)
   }
 
@@ -52,7 +59,7 @@ export function Header (): JSX.Element {
         </div>
       </nav>
       <section className='relative flex-1 border-[#282828] rounded-2xl border overflow-y-scroll'>
-        <form action={handleAction} className='sticky top-0 bg-[#141414]/30 backdrop-blur-sm'>
+        <form action={() => { void handleAction() }} className='sticky top-0 bg-[#141414]/30 backdrop-blur-sm'>
           <div className='flex p-4 pr-0 justify-between items-center'>
             <h2 className='text-base'>Chats</h2>
             <button type='submit'>
@@ -63,12 +70,13 @@ export function Header (): JSX.Element {
         <ul className='flex flex-col gap-2 pl-4'>
           {
             chats.map((chat, index) => (
-              <li onClick={async () => await handleChats(chat)} key={`chat-${index}`} className='flex flex-col items-center gap-2 p-2 border border-[#282828] rounded-2xl shadow-sm cursor-pointer'>
+              <li onClick={() => { void handleChats(chat) }} key={`chat-${index}`} className='flex flex-col items-center gap-2 p-2 border border-[#282828] rounded-2xl shadow-sm cursor-pointer'>
                 <div className='flex justify-between items-center gap-1 w-full self-start text-sm h-6'>
-                  <span className='truncate'>{chat?.list_of_messages[0]?.content ?? 'New chat'}</span>
-                  {currentChat.id === chat.id && <Badge variant='success'>current</Badge>}
+                  {chat?.list_of_messages?.[0]?.content === undefined && <span className='truncate'>New chat</span>}
+                  {chat?.list_of_messages?.[0]?.content !== undefined && chat?.list_of_messages?.[0]?.content !== null && <span className='truncate'>{String(chat?.list_of_messages[0]?.content)}</span>}
+                  {currentChat?.id === chat.id && <Badge variant='success'>current</Badge>}
                 </div>
-                <small className='self-end text-xs text-[#959595]'>{formatTime(chat.created_at)}</small>
+                {chat?.created_at !== null && chat?.created_at !== undefined && <small className='self-end text-xs text-[#959595]'>{formatTime(chat.created_at)}</small>}
               </li>
             ))
           }

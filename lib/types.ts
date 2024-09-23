@@ -4,7 +4,7 @@ export interface Chat {
   id: string
   user_id: string
   list_of_messages: CoreMessage[]
-  created_at?: string
+  created_at?: Date
 }
 
 export interface User {

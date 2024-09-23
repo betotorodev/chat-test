@@ -5,8 +5,7 @@ import { CoreMessage, streamText } from 'ai'
 import { createOpenAI as createGroq } from '@ai-sdk/openai'
 import { createChat, createUser, updateChat } from '@/lib/db/queries'
 import { context } from '@/lib/utils'
-import { BasicType } from '@/lib/types'
-import { Chat } from '@mlc-ai/web-llm'
+import { BasicType, Chat } from '@/lib/types'
 
 const groq = createGroq({
   baseURL: 'https://api.groq.com/openai/v1',

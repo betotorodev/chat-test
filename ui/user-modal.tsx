@@ -23,9 +23,9 @@ export const UserModal = (): JSX.Element => {
     setLoading(true)
     const formData = new FormData(event.currentTarget as HTMLFormElement)
     const { success, user, chat } = await addUser(formData)
-    setUser(user)
-    setCurrentChat(chat)
-    if (success === true) {
+    if (user !== undefined && user !== null) setUser(user)
+    if (chat !== undefined && chat !== null) setCurrentChat(chat)
+    if (success) {
       setOpen(false)
     }
     setLoading(false)
@@ -41,7 +41,7 @@ export const UserModal = (): JSX.Element => {
           <DialogDescription className='mb-6'>
             ⚽️ Please provide a user name and star talking with jarvis
           </DialogDescription>
-          <form className='flex flex-col gap-4' onSubmit={handleSubmit} data-testid='user-form'>
+          <form className='flex flex-col gap-4' onSubmit={() => { void handleSubmit }} data-testid='user-form'>
             <Input type='text' name='user_name' className='bg-[#1a1a1a]' aria-label='user_name' placeholder='Say something...' />
             <Button isLoading={loading} type='submit' className='w-full ring-0 outline-none mt-2' variant='primary'>Ok, got it!</Button>
           </form>
