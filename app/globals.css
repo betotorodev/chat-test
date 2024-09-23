@@ -10,13 +10,6 @@
   --foreground: #f9f9f9;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #141414;
-    --foreground: #f9f9f9;
-  }
-}
-
 body {
   color: var(--foreground);
   background: var(--background);
