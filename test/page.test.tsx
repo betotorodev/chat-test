@@ -23,7 +23,7 @@ describe('Header Component', () => {
 
     render(<Header />)
 
-    expect(screen.getByText('beto')).toBeInTheDocument()
-    expect(screen.getByText('Súper user')).toBeInTheDocument()
+    expect(screen.getByText('Leo')).toBeInTheDocument()
+    expect(screen.getByText('Coach')).toBeInTheDocument()
   })
 })
