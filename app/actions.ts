@@ -5,6 +5,8 @@ import { CoreMessage, streamText } from 'ai'
 import { createOpenAI as createGroq } from '@ai-sdk/openai'
 import { createChat, createUser, updateChat } from '@/lib/db/queries'
 import { context } from '@/lib/utils'
+import { BasicType } from '@/lib/types'
+import { Chat } from '@mlc-ai/web-llm'
 
 const groq = createGroq({
   baseURL: 'https://api.groq.com/openai/v1',
@@ -22,7 +24,7 @@ export async function continueConversation (messages: CoreMessage[]): Promise<st
   return stream.value
 }
 
-export async function addChat (userId: string): Promise<any> {
+export async function addChat (userId: string): Promise<BasicType> {
   const chatId = crypto.randomUUID()
 
   const chat = {
@@ -39,7 +41,7 @@ export async function addChat (userId: string): Promise<any> {
   }
 }
 
-export async function editChat (chat: any): Promise<any> {
+export async function editChat (chat: Chat): Promise<BasicType> {
   try {
     await updateChat(chat)
     return { success: true }
@@ -49,8 +51,8 @@ export async function editChat (chat: any): Promise<any> {
   }
 }
 
-export async function addUser (formData: FormData): Promise<any> {
-  const name = formData.get('user_name')
+export async function addUser (formData: FormData): Promise<BasicType> {
+  const name = formData.get('user_name') as string
   const userId = crypto.randomUUID()
   const chatId = crypto.randomUUID()
 

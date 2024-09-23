@@ -1,9 +1,6 @@
+import { Chat, User } from '@/lib/types'
+import { CoreMessage } from 'ai'
 import { create } from 'zustand'
-
-interface User {
-  id: string
-  user_name: string
-}
 
 interface UserState {
   user: User | null
@@ -11,9 +8,9 @@ interface UserState {
 }
 
 interface CurrentChat {
-  currentChat: any
-  setCurrentChat: (currentChat: any) => void
-  setMessages: (messages: any) => void
+  currentChat: Chat | null
+  setCurrentChat: (currentChat: Chat | null) => void
+  setMessages: (messages: CoreMessage[]) => void
 }
 
 export const useUserStore = create<UserState>((set) => ({
@@ -22,12 +19,18 @@ export const useUserStore = create<UserState>((set) => ({
 }))
 
 export const useCurrentChatStore = create<CurrentChat>((set) => ({
-  currentChat: null,
+  currentChat: {
+    id: '',
+    user_id: '',
+    list_of_messages: []
+  },
   setCurrentChat: (currentChat) => set(() => ({ currentChat })),
   setMessages: (messages) => set((state) => ({
     ...state,
     currentChat: {
       ...state.currentChat,
+      id: state.currentChat?.id ?? '',
+      user_id: state.currentChat?.user_id ?? '',
       list_of_messages: messages
     }
   }))
