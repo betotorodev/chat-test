@@ -40,7 +40,7 @@ export const UserModal = (): JSX.Element => {
           </DialogDescription>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <Input type='text' name='user_name' className='bg-[#1a1a1a]' />
-            <Button type='submit' className='w-full sm:w-fit ring-0 outline-none mt-2' variant='primary'>Ok, got it!</Button>
+            <Button type='submit' className='w-full ring-0 outline-none mt-2' variant='primary'>Ok, got it!</Button>
           </form>
         </DialogContent>
       </Dialog>

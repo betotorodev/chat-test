@@ -57,10 +57,10 @@ export function Header (): JSX.Element {
           {
             chats.map((chat, index) => (
               <li onClick={() => setCurrentChat(chat)} key={`chat-${index}`} className='flex flex-col items-center gap-2 p-2 border border-[#282828] rounded-2xl shadow-sm cursor-pointer'>
-                <p className='flex justify-between items-center w-full self-start text-sm'>
+                <div className='flex justify-between items-center w-full self-start text-sm h-6'>
                   <span>{chat?.list_of_messages[0]?.content ?? 'New chat'}</span>
                   {currentChat.id === chat.id && <Badge variant='success'>current</Badge>}
-                </p>
+                </div>
                 <small className='self-end text-xs text-[#959595]'>{formatTime(chat.created_at)}</small>
               </li>
             ))
