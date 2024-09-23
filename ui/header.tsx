@@ -23,6 +23,11 @@ export function Header (): JSX.Element {
     setCurrentChat(chat)
   }
 
+  const handleChats = async (chat): Promise<void> => {
+    await editChat(currentChat)
+    setCurrentChat(chat)
+  }
+
   useEffect(() => {
     if (user !== null) {
       getChats(user.id)
@@ -58,7 +63,7 @@ export function Header (): JSX.Element {
         <ul className='flex flex-col gap-2 px-4'>
           {
             chats.map((chat, index) => (
-              <li onClick={() => setCurrentChat(chat)} key={`chat-${index}`} className='flex flex-col items-center gap-2 p-2 border border-[#282828] rounded-2xl shadow-sm cursor-pointer'>
+              <li onClick={async () => await handleChats(chat)} key={`chat-${index}`} className='flex flex-col items-center gap-2 p-2 border border-[#282828] rounded-2xl shadow-sm cursor-pointer'>
                 <div className='flex justify-between items-center gap-1 w-full self-start text-sm h-6'>
                   <span className='truncate'>{chat?.list_of_messages[0]?.content ?? 'New chat'}</span>
                   {currentChat.id === chat.id && <Badge variant='success'>current</Badge>}

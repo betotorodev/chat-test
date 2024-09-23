@@ -30,6 +30,7 @@ export const getChats = async (user_id: string) => {
     .from('chats')
     .select()
     .eq('user_id', user_id)
+    .order('created_at', { ascending: false })
 
   if (error != null) {
     console.log(error)
