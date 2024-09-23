@@ -15,10 +15,12 @@ import { useCurrentChatStore, useUserStore } from '@/app/store'
 
 export const UserModal = (): JSX.Element => {
   const [open, setOpen] = useState(true)
+  const [loading, setLoading] = useState(false)
   const setUser = useUserStore((state) => state.setUser)
   const setCurrentChat = useCurrentChatStore((state) => state.setCurrentChat)
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault()
+    setLoading(true)
     const formData = new FormData(event.currentTarget as HTMLFormElement)
     const { success, user, chat } = await addUser(formData)
     setUser(user)
@@ -26,12 +28,13 @@ export const UserModal = (): JSX.Element => {
     if (success === true) {
       setOpen(false)
     }
+    setLoading(false)
   }
 
   return (
     <div className='flex justify-center'>
       <Dialog open={open} onOpenChange={() => setOpen(false)}>
-        <DialogContent className='bg-[#282828 border-[#959595] ring-0 sm:max-w-lg'>
+        <DialogContent className='bg-[#1a1a1a] border-[#282828] ring-0 sm:max-w-lg'>
           <DialogHeader>
             <DialogTitle className='text-[#f9f9f9]'>Hi! welcome to soccer chat</DialogTitle>
           </DialogHeader>
@@ -40,7 +43,7 @@ export const UserModal = (): JSX.Element => {
           </DialogDescription>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <Input type='text' name='user_name' className='bg-[#1a1a1a]' />
-            <Button type='submit' className='w-full ring-0 outline-none mt-2' variant='primary'>Ok, got it!</Button>
+            <Button isLoading={loading} type='submit' className='w-full ring-0 outline-none mt-2' variant='primary'>Ok, got it!</Button>
           </form>
         </DialogContent>
       </Dialog>

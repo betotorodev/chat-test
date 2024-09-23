@@ -60,12 +60,11 @@ React.ComponentPropsWithoutRef<typeof DialogPrimitives.Content>
             // base
             'fixed left-1/2 top-1/2 z-50 w-[95vw] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border p-6 shadow-lg',
             // border color
-            'border-[#959595] dark:border-gray-900',
+            'border-[#282828]',
             // background color
-            'bg-white dark:bg-[#090E1A]',
+            'bg-[#1a1a1a]',
             // transition
             'data-[state=open]:animate-dialogContentShow',
-            focusRing,
             className
           )}
           tremor-id='tremor-raw'

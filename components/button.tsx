@@ -6,6 +6,7 @@ import { AddIcon } from '@/icons/add'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 import { cx, focusRing } from '@/lib/utils'
+import { LoaderIcon } from '@/icons/loader'
 
 const buttonVariants = tv({
   base: [
@@ -126,8 +127,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading
           ? (
             <span className='pointer-events-none flex shrink-0 items-center justify-center gap-1.5'>
-              <AddIcon
-                className='size-4 shrink-0 animate-spin'
+              <LoaderIcon
+                className='shrink-0 animate-spin'
                 aria-hidden='true'
               />
               <span className='sr-only'>
