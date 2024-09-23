@@ -47,20 +47,20 @@ export function Header (): JSX.Element {
           😎
         </div>
         <div className='flex flex-col gap-1 flex-1 overflow-hidden'>
-          <h1 className='leading-none truncate'>{user?.user_name ?? 'beto'}</h1>
-          <small className='leading-none text-[#959595]'>Súper user</small>
+          <h1 className='leading-none truncate'>{user?.user_name ?? 'Leo'}</h1>
+          <small className='leading-none text-[#959595]'>Coach</small>
         </div>
       </nav>
       <section className='relative flex-1 border-[#282828] rounded-2xl border overflow-y-scroll'>
         <form action={handleAction} className='sticky top-0 bg-[#141414]/30 backdrop-blur-sm'>
-          <div className='flex p-4  justify-between items-center'>
+          <div className='flex p-4 pr-0 justify-between items-center'>
             <h2 className='text-base'>Chats</h2>
             <button type='submit'>
               <AddIcon />
             </button>
           </div>
         </form>
-        <ul className='flex flex-col gap-2 px-4'>
+        <ul className='flex flex-col gap-2 pl-4'>
           {
             chats.map((chat, index) => (
               <li onClick={async () => await handleChats(chat)} key={`chat-${index}`} className='flex flex-col items-center gap-2 p-2 border border-[#282828] rounded-2xl shadow-sm cursor-pointer'>
