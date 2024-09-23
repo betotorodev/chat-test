@@ -4,6 +4,7 @@ import { createStreamableValue } from 'ai/rsc'
 import { CoreMessage, streamText } from 'ai'
 import { createOpenAI as createGroq } from '@ai-sdk/openai'
 import { createChat, createUser, updateChat } from '@/lib/db/queries'
+import { context } from '@/lib/utils'
 
 const groq = createGroq({
   baseURL: 'https://api.groq.com/openai/v1',
@@ -13,7 +14,7 @@ const groq = createGroq({
 export async function continueConversation (messages: CoreMessage[]): Promise<string | any> {
   const result = await streamText({
     model: groq('llama-3.1-70b-versatile'),
-    system: 'You are a helpful assistant.',
+    system: context,
     messages
   })
 
