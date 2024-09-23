@@ -33,7 +33,7 @@ export const UserModal = (): JSX.Element => {
 
   return (
     <div className='flex justify-center'>
-      <Dialog open={open} onOpenChange={() => setOpen(false)}>
+      <Dialog open={open}>
         <DialogContent className='bg-[#1a1a1a] border-[#282828] ring-0 sm:max-w-lg'>
           <DialogHeader>
             <DialogTitle className='text-[#f9f9f9]'>Hi! welcome to soccer chat</DialogTitle>
