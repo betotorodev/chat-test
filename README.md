@@ -5,6 +5,8 @@
 
 This repository contains the source code for a soccer chatbot application. The chatbot provides information and answers related to soccer.
 
+You can try the app here: [soccer chat](https://chat-test-gules.vercel.app/)
+
 ## Getting Started
 
 To get started with the development and running of this application, follow the instructions below.
