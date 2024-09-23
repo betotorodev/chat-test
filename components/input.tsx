@@ -1,5 +1,3 @@
-// Tremor Input [v1.0.5]
-
 import React from 'react'
 import { SearchIcon } from '@/icons/search'
 import { EyeIcon } from '@/icons/eye'
