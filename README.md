@@ -11,7 +11,16 @@ To get started with the development and running of this application, follow the 
 
 ### Prerequisites
 
-Ensure you have Node.js v18 or greatter installed on your machine. This project uses npm as the package manager. 
+Ensure you have Node.js v18 or greatter installed on your machine. This project uses npm as the package manager.
+
+This project user a Groq API KEY for the AI model and also use Suapabse for Database.
+
+```bash
+# Create a groq api key at https://groq.com/
+
+# Create a supabase project at https://app.supabase.io/
+```
+
 
 ### Installation
 
